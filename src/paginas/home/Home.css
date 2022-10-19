@@ -1,0 +1,74 @@
+.text{
+    text-decoration: none
+}
+
+.titulo-home {
+    color: black !important;
+    font-weight: 700 !important;
+    font-size: 50 !important;
+    font-family: 'Quicksand' !important
+}
+
+.subtitulo-home {
+    color: black !important;
+    font-weight: 400 !important;
+    font-size: 30 !important;
+    font-family: 'Quicksand' !important
+}
+
+.img-home {
+    margin: 0 auto;
+    display: block;
+}
+
+.padding {
+    padding-bottom: 40px !important;
+    padding-top: 40px !important;
+}
+
+.box-sobre {
+    border-radius: 15px 15px 10px 10px !important;
+    -webkit-border-radius: 24px 24px 10px 10px !important;
+    -moz-border-radius: 15px 15px 10px 10px !important;
+    justify-content: center !important;
+    align-items: center !important;
+    flex-flow: row;
+    padding-left: 5rem;
+    margin-bottom: 54px;
+    margin-top: 48px;
+    background-color: #4d3efc;
+}
+
+.titulo-sobre {
+    color: white;
+    font-size: 50px;
+    font-weight: 700;
+    font-family: 'Quicksand' 
+}
+
+.btn-sobre {
+    color: black !important;
+    background-color: #30d1bc !important;
+    font-family: 'Quicksand' !important;
+    font-weight: 700 !important
+}
+
+.btn-postagem {
+    color: #4d3efc !important;
+    border: 1px solid #4d3efc;
+}
+
+.btn-postagem:hover {
+    background-color: #4d3efc !important;
+    color: white !important;
+}
+
+.margin-right {
+    margin-right: 40px !important;
+    font-family: 'Quicksand' !important;
+    font-weight: 500 !important
+}
+
+.img-sobre {
+    margin-right: 80px !important;
+}

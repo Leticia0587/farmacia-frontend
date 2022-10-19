@@ -1,88 +1,177 @@
-import { Box,Grid,TextField,Typography, Button} from '@mui/material';
-import {Link, useNavigate} from "react-router-dom";
-import useLocalStorage from 'react-use-localstorage';
 import React, { useState, useEffect, ChangeEvent } from 'react';
-
+import { Grid, Box, Typography, TextField, Button, InputAdornment } from '@mui/material';
+import { Link, useNavigate} from 'react-router-dom';
 import { login } from '../../service/Service';
-import './Login.css';
 import UserLogin from '../../models/UserLogin';
+import './Login.css';
+import { useDispatch } from 'react-redux';
+import { addId, addToken } from '../../store/tokens/actions';
+import { toast } from 'react-toastify';
+import logoFarm from '../../img/logo.svg';
+import { AccountCircle } from '@mui/icons-material';
+import { pink } from '@material-ui/core/colors';
+import LockSharpIcon from '@mui/icons-material/LockSharp'
 
-
-function Login(){
-    let history = useNavigate();
-    const [token, setToken]= useLocalStorage('token');
-    const[userLogin, setUserLogin]= useState<UserLogin>(
-         {
-            id:0,
-            nome:'',
-            usuario:'',
-            senha:'',
-            foto:'',
+function Login() {
+    const dispatch = useDispatch();
+    let navigate = useNavigate();
+    const [token, setToken] = useState('');
+    const [userLogin, setUserLogin] = useState<UserLogin>(
+        {
+            id: 0,
+            nome: '',
+            usuario: '',
+            senha: '',
+            foto: '',
             cpf: '',
-            endereco:'',
-            token:'',
-         }
-        )
+            endereco: '',
+            token: '',
+        }
+        );
 
-        function updatedModel( e: ChangeEvent<HTMLInputElement>){
+        const [respUserLogin, setRespUserLogin] = useState<UserLogin>({
+            id: 0,
+            nome: '',
+            usuario: '',
+            senha: '',
+            foto: '',
+            cpf: '',
+            endereco: '',
+            token: '',
+        });
 
-                setUserLogin({
-                    ...userLogin,
-                    [ e.target.name]:e.target.value
-                })
-        }       
-            useEffect(()=>{
-                if(token != ''){
-                    history('/home')
+
+        function updatedModel(e: ChangeEvent<HTMLInputElement>) {
+
+            setUserLogin({
+                ...userLogin,
+                [e.target.name]: e.target.value
+            })
+        }
+
+            useEffect(()=> {
+                if(respUserLogin.token !== ''){
+                    dispatch(addToken(respUserLogin.token))
+                    dispatch(addId(respUserLogin.id.toString()))
+                    navigate('/home');
                 }
-            },[token])
+            }, [respUserLogin.token])
 
 
-            async function onSubmit( e: ChangeEvent<HTMLFormElement>){
-                e.preventDefault();
-                try{
-                    await login(`/usuario/logar`, userLogin, setToken)
-                
-
-                    alert('Usuário logado com sucesso!');
-                }catch (error){
-                    alert('Dados do usuário inconsistentes. Erro ao logar!');
-
-                }
-                
+        async function onSubmit(e: ChangeEvent<HTMLFormElement>){
+            e.preventDefault();
+            try{
+                await login(`/usuario/logar`, userLogin, setRespUserLogin);
+                toast.success('Logado', {
+                    position: "top-right",
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: false,
+                    theme: "colored",
+                    progress: undefined,
+                });
+            }catch(error){
+                toast.error('Login ou senha inválidos', {
+                    position: "top-right",
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: false,
+                    theme: "colored",
+                    progress: undefined,
+                });
             }
-    return(
-        <Grid container direction='row' justifyContent='center' alignItems='center'>
-            <Grid alignItems='center' xs={6}>
-                <Box padding={20}>
-                    <form onSubmit={onSubmit}>
-                        <Typography variant='h3' gutterBottom color='textPrimary' component='h3' align='center' className='textos1'>  Entrar</Typography>
-                        <TextField value={userLogin.usuario} onChange={(e:ChangeEvent<HTMLInputElement>)=> updatedModel(e)} id='usuario' label='usuario' variant='outlined' name='usuario' margin='normal' fullWidth/>
-                        <TextField value={userLogin.senha} onChange={(e:ChangeEvent<HTMLInputElement>)=> updatedModel(e)} id='senha' label='senha' variant='outlined' name='senha' margin='normal' type='password' fullWidth />
-                        <Box marginTop={2} textAlign='center'>
-                            
-                            <Button type='submit' variant='contained' color='primary'>
-                                Logar
-                            </Button>
-                            
-                        </Box>
-                    </form>
-                        <Box display='flex' justifyContent='center' marginTop={2}>
-                            <Box marginRight={1}>
-                                <Typography variant='subtitle1' gutterBottom align='center'>Não tem uma conta?</Typography>
-                            </Box>
-                            <Link to='/cadastrousuario'>
-                            <Typography variant='subtitle1' gutterBottom align='center' className='textos1'> Cadastre-se</Typography>
-                            </Link>
-                            
-                        </Box>
-                </Box>
-            </Grid>
-            <Grid xs={6} className='imagem'>
-                
+        }
 
-            </Grid>
+    return (
+
+<>
+        <Grid xs={12} className='imagem-login' >
+        <Box paddingX={50} className='box'>
+        <div className="vidro">
+            <form onSubmit={onSubmit} className= "form">
+              <Typography
+                variant="h3"
+                gutterBottom
+                color="textPrimary"
+                component="h3"
+                align="center"
+                className='textos' 
+                
+              >
+                 <img src={logoFarm} alt=""  />
+                 
+                
+              </Typography>
+              <TextField className='txt-style inputBranco' 
+                value={userLogin.usuario}
+                onChange={(event: ChangeEvent<HTMLInputElement>) => updatedModel(event)}
+                id="usuario"
+                label="Usuário"
+                placeholder="Entre com seu usuário"
+                name="usuario"
+                margin="normal"
+                fullWidth
+                variant="standard"
+                InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <AccountCircle sx={{ color: pink[500] }}/>
+                      </InputAdornment>
+                    ),
+                  }}
+                
+              />
+              <TextField className='txt-style inputBranco'
+                value={userLogin.senha}
+                onChange={(event: ChangeEvent<HTMLInputElement>) => updatedModel(event)}
+                id="senha"
+                label="Senha"
+                variant="standard"
+                name="senha"
+                margin="normal"
+                type="password"
+                placeholder="Entre com sua senha"
+                fullWidth
+                InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <LockSharpIcon sx={{ color: pink[500] }}/>
+                      </InputAdornment>
+                    ),
+                  }}
+              />
+                <Box marginTop={2} textAlign='center'>
+                                      
+                    <Button type='submit' variant='contained' className="btn-login" >
+                        Logar
+                    </Button>
+
+                </Box>
+                <Box display='flex' justifyContent='center' marginTop={2}>
+              <Box marginRight={1}>
+                <Typography variant='subtitle1' gutterBottom align='center' className='bold'>
+                  Não tem uma conta?
+                </Typography>
+              </Box>
+              <Link to='/cadastrousuario'  className='textos'>
+                  <Typography variant='subtitle1' gutterBottom align='center' className='bold'>
+                      Cadastre-se
+                  </Typography>
+              </Link>
+            </Box>
+            </form>
+           
+          </div>
+          </Box>
         </Grid>
+    </>
+
+      
     );
 }
+
 export default Login;

@@ -9,35 +9,51 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import userEvent from '@testing-library/user-event';
 import React, { ChangeEvent, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import useLocalStorage from 'react-use-localstorage';
 import Categoria from '../../../models/Categoria';
 import Produto from '../../../models/Produto';
 import User from '../../../models/User';
 import { busca, buscaId, post, put, } from '../../../service/Service';
-import ListaProduto from '../listaproduto/ListaProduto';
+import { TokenState } from '../../../store/tokens/tokensReducer';
+
 
 function CadastroProduto() {
+
   let navigate = useNavigate();
-
   const { id } = useParams<{ id: string }>();
-
   const [categorias, setCategorias] = useState<Categoria[]>([]);
-  const [token, setToken] = useLocalStorage('token');
-  
-  
+  const token = useSelector<TokenState, TokenState["tokens"]>(
+    (state) => state.tokens
+
+  );
+
+
+useEffect(() => {
+  if (token === "") {
+      toast.error('Você precisa estar logado!', {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: false,
+          theme: 'dark',
+          progress: undefined,
+      });
+      navigate("/login")
+
+  }
+}, [token])
+
+
 
   const [categoria, setCategoria] = useState<Categoria>({
     id: 0,
     tipo: '',
   });
-
-  
- //const userId = useSelector<TokenState, TokenState['id']>(
-  //  (state) => state.id  )
 
   const [produto, setProduto] = useState<Produto>({
     id: 0,
@@ -47,12 +63,19 @@ function CadastroProduto() {
     quantidade: 0,
     preco: 0,
     categoria: null,
-    //usuario: null 
+    usuario: null 
   });
 
- 
+
+  const userId = useSelector<TokenState, TokenState['id']>(
+    (state) => state.id
+  )
+
+
+
+  
   const [usuario, setUsuario] = useState<User>({
-    id: 0,
+    id: +userId,
     nome: '',
     usuario: '',
     senha: '',
@@ -60,9 +83,10 @@ function CadastroProduto() {
     cpf: '',
     endereco: ''
   })
+  
 
   useEffect(() => {
-    if (token == "") {
+    if (token === "") {
         toast.error('Você precisa estar logado', {
             position: "top-right",
             autoClose: 2000,
@@ -73,15 +97,24 @@ function CadastroProduto() {
             theme: "colored",
             progress: undefined,
         });
-        navigate("/login")}},[token]);
+        navigate("/login")
+    }
+  },[token])
 
   useEffect(() => {
     setProduto({
       ...produto,
       categoria: categoria,
-      //usuario: usuario
+      usuario: usuario
     });
   }, [categoria]);
+
+  useEffect(() => {
+    getCategoria();
+    if (id !== undefined) {
+      findByIdProduto(id);
+    }
+  }, [id]);
 
   async function findByIdProduto(id: string) {
     await buscaId(`produto/${id}`, setProduto, {
@@ -90,13 +123,6 @@ function CadastroProduto() {
       },
     });
   }
-
-  useEffect(() => {
-    getCategoria();
-    if (id !== undefined) {
-      findByIdProduto(id);
-    }
-  }, [id]);
 
   async function getCategoria() {
     await busca('/categoria', setCategorias, {
@@ -110,108 +136,107 @@ function CadastroProduto() {
     setProduto({
       ...produto,
       [event.target.name]: event.target.value,
-      categoria: categoria,
+      categoria: categoria
     });
   }
 
   async function onSubmit(e: ChangeEvent<HTMLFormElement>) {
-    e.preventDefault();
+    e.preventDefault()
 
     if (id !== undefined) {
-      try {
-        await put(`/produto`, produto, setProduto, {
-          headers: {
-            Authorization: token,
-          },
+        try{ 
+            await put(`/produto`, produto, setProduto, {
+            headers: {
+                'Authorization': token,
+            },
         });
-        alert('Produto atualizado com sucesso');
-      } catch (error) {
-        alert('Erro ao atualizar, verifique os campos');
-      }
-    } else {
-      try {
-        await post(`/produto`, produto, setProduto, {
-          headers: {
-            Authorization: token,
-          },
+        toast.success('Produto Atualizado', {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: false,
+            theme: "colored",
+            progress: undefined,
         });
-        alert('Produto cadastrado com sucesso');
-      } catch (error) {
-        alert('Erro ao cadastrar, verifique os campos');
-      }
+    } catch (error) {
+        toast.error('Erro na atualização, verifique se os campos foram preenchidos corretamente', {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: false,
+            theme: "colored",
+            progress: undefined,
+        });
     }
-    navigate('/produto');
-  }
+}else{
+    try{ 
+        await post(`/produto`, produto, setProduto, {
+            headers: {
+                'Authorization': token,
+            },
+        });
+        toast.success('Produto Cadastrado', {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: false,
+            theme: "colored",
+            progress: undefined,
+        });
+    } catch (error) {
+        toast.error('Erro ao cadastrar, verifique se os campos foram preenchidos corretamente', {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: false,
+            theme: "colored",
+            progress: undefined,
+        });
+    }
+}
+    navigate('/produtos')
+}
+  
 
   return (
-    <>
-      <Container>
+    <Container maxWidth="sm" className="topo">
         <form onSubmit={onSubmit}>
-          <Typography
-            variant="h3"
-            color="textSecondary"
-            component="h1"
-            align="center"
-          >
-            Formulário de cadastro Produto
-          </Typography>
+            <Typography variant="h3" color="textSecondary" component="h1" align="center" >Formulário de cadastro produto</Typography>
 
-          <TextField
-            value={produto.nome}
-            onChange={(e: ChangeEvent<HTMLInputElement>) => updatedProduto(e)}
-            id="nome"
-            label="nome"
-            variant="outlined"
-            name="nome"
-            margin="normal"
-            fullWidth
-          />
-
-          <TextField
-            value={produto.descricao}
-            onChange={(e: ChangeEvent<HTMLInputElement>) => updatedProduto(e)}
-            id="descricao"
-            label="descricao"
-            name="descricao"
-            variant="outlined"
-            margin="normal"
-            fullWidth
-          />
-
-          <FormControl fullWidth variant="standard">
-            <InputLabel id="demo-simple-select-helper-label">Categoria </InputLabel>
-
-            <Select
-              labelId="demo-simple-select-helper-label"
-              id="demo-simple-select-helper"
-              onChange={(e) =>
-                buscaId(`/categoria/${e.target.value}`, setCategoria, {
-                  headers: {
-                    Authorization: token,
-                  },
-                })
-              }
-            >
-              {categorias.map((item) => (
-                <MenuItem value={item.id} style={{ display: 'block' }}>
-                  {item.tipo}
-                </MenuItem>
-              ))}
-            </Select>
-            <FormHelperText>Escolha uma Categoria para o Produto</FormHelperText>
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              disabled={categoria.id === 0}
-            >
-              Cadastrar
-            </Button>
-          </FormControl>
+            <TextField value={produto.nome} onChange={(event: ChangeEvent<HTMLInputElement>) => updatedProduto(event)} id="nome" label="nome" variant="outlined" name="nome" margin="normal" fullWidth />
+            <TextField value={produto.descricao} onChange={(event: ChangeEvent<HTMLInputElement>) => updatedProduto(event)} id="descricao" label="descricao" name="descricao" variant="outlined" margin="normal" fullWidth />
+            <TextField value={produto.fabricante} onChange={(event: ChangeEvent<HTMLInputElement>) => updatedProduto(event)} id="fabricante" label="fabricante" name="fabricante" variant="outlined" margin="normal" fullWidth />
+            <TextField value={produto.quantidade} onChange={(event: ChangeEvent<HTMLInputElement>) => updatedProduto(event)} id="quantidade" label="quantidade" name="quantidade" variant="outlined" margin="normal" fullWidth />
+            <TextField value={produto.preco} onChange={(event: ChangeEvent<HTMLInputElement>) => updatedProduto(event)} id="preco" label="preco" name="preco" variant="outlined" margin="normal" fullWidth />
+            <FormControl >
+                <InputLabel id="demo-simple-select-helper-label">Categoria </InputLabel>
+                <Select labelId="demo-simple-select-helper-label" id="demo-simple-select-helper" onChange={(event: any) => buscaId(`/categoria/${event.target.value}`, setCategoria, {
+                        headers: {
+                            'Authorization': token
+                        }
+                    })}>
+                    {
+                        categorias.map(categoria => (
+                            <MenuItem value={categoria.id}>{categoria.tipo}</MenuItem>
+                        ))
+                    }
+                </Select>
+                <FormHelperText>Escolha uma categoria para o produto</FormHelperText>
+                <Button type="submit" variant="contained" color="primary" className='btn-lista-cadastro'>
+                    Finalizar
+                </Button>
+            </FormControl>
         </form>
-      </Container>
-    </>
-  );
+    </Container>
+  )
 }
 
 export default CadastroProduto;
