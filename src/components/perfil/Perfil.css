@@ -1,0 +1,61 @@
+.perfilContainer{
+    display: flex !important;
+    justify-content: center !important;
+    margin-top: 1rem !important;
+    gap: 1rem !important;
+  }
+  
+  .perfilusuario {
+    border-radius: 25% 6% 25% 67% / 39% 38% 62% 25%;
+    padding: 1rem !important;
+    background: rgba(255, 255, 255, 0.27);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5.4px);
+    -webkit-backdrop-filter: blur(5.4px);
+    border: 1px solid rgba(255, 255, 255, 1);
+  }
+  
+  .imgPerfil {
+    width: 80% !important;
+    border-radius: 50% !important;
+    margin: 0 auto !important;
+    display: block !important;
+    border-style: double;
+    border-width: 6px;
+    border-color: #4d3efc;
+    height: 200px !important;
+    width: 200px !important;
+    align-items: center !important;
+  }
+  
+  .postUser {
+    display: flex !important;
+    gap: 1rem !important;
+    padding-left: 1rem !important;
+    margin-top: 1rem !important;
+  }
+  
+  .postPerfil {
+    -webkit-box-shadow: 3px 3px 15px 1px rgba(0,0,0,0.4) !important; 
+    box-shadow: 3px 3px 15px 1px rgba(0,0,0,0.4) !important;
+    border-radius: 8px !important;
+    padding: 0 1rem 1.5rem !important;
+  }
+  
+  .txt {
+    font-weight: lighter;
+    font-size: 12px;
+    text-decoration: underline;
+  }
+  
+  .titulo-perfil {
+    font-family: 'Quicksand' !important;
+    font-weight: 700 !important;
+  }
+
+
+  .subtitulo-perfil {
+    font-family: 'Quicksand' !important;
+    font-weight: 500 !important;
+  }

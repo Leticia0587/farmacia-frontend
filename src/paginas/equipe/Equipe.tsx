@@ -1,4 +1,4 @@
-import { Box, Button, Container, Typography } from "@material-ui/core";
+import { Box, Button, Container, Typography } from "@mui/material";
 import { Avatar, Grid, Link } from "@mui/material";
 import React from "react";
 import "./Equipe.css";
@@ -21,7 +21,7 @@ function Equipe() {
           style={{ justifyContent: "center", display: "flex" }}
           className="margin-titulo-equipe"
         >
-          <Typography style={{ fontSize: 50, fontWeight: "bold" }}>
+          <Typography className='titulo-equipe'>
             Equipe
           </Typography>
         </Grid>

@@ -19,6 +19,8 @@ import CadastroProduto from "./components/produtos/cadastroProduto/CadastroProdu
 import Login from "./paginas/login/Login";
 import Sobre from "./paginas/sobre/Sobre";
 import Equipe from "./paginas/equipe/Equipe";
+import Perfil from "./components/perfil/Perfil";
+
 
 
 
@@ -44,13 +46,12 @@ function App() {
           <Route path="/formularioProduto" element={<CadastroProduto />} />
           <Route path="/formularioProduto/:id" element={<CadastroProduto />} />
           <Route path="/formularioCategoria" element={<CadastroCategoria />} />
-          <Route path="/formularioCategoria/:id" element={<CadastroCategoria />} />
+          <Route path="/atualizarCategoria/:id" element={<CadastroCategoria />} />
           <Route path="/deletarProduto/:id" element={<DeletarProduto />} /> 
           <Route path="/deletarCategoria/:id" element={<DeletarCategoria />} />
-
           <Route path="/sobre" element={<Sobre/>}/>
-
           <Route path="/equipe" element={<Equipe />} />
+          <Route path="/perfil" element={<Perfil />} />
 
         </Routes>
       </div>
