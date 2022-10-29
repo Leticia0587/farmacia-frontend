@@ -1,71 +1,61 @@
-# Link para acessar o site:
-https://farmaciasolidaria.netlify.app
+<p align="center"><img src="http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=GREEN&style=for-the-badge"/></p>
 
+# 📁 Acesso ao projeto: https://farmaciasolidaria.netlify.app
 
-![faramaciasoli](https://user-images.githubusercontent.com/113915415/196948142-d223377d-46a2-4c64-83fa-ae5b7ff94d57.png)
+<br>
 
-![farmahomepng](https://user-images.githubusercontent.com/113915415/196948189-7741f6ae-ac05-4889-b46d-eb5e260904ef.png)
+![image](https://user-images.githubusercontent.com/113915415/196948142-d223377d-46a2-4c64-83fa-ae5b7ff94d57.png)
 
-![produtosfaro](https://user-images.githubusercontent.com/113915415/196949221-c789d47d-1e23-4564-874e-0e895048cd79.png)
+![image](https://user-images.githubusercontent.com/113915415/196948189-7741f6ae-ac05-4889-b46d-eb5e260904ef.png)
+
+![image](https://user-images.githubusercontent.com/113915415/197874659-2e73ade7-7d3c-44d7-8736-d705efceb70b.png)
+
+![image](https://user-images.githubusercontent.com/113915415/197874718-5d4b966a-ce0e-474e-965b-86b2eac66546.png)
+
 
 
 Projeto Fármacia Solidária -> Front-end que faz integração com o Back-End O usuário deve se cadastrar, para logar e ter acesso ao site, podendo fazer postagens dos seus produtos e incluir categorias sugeridas para futuros produtos.
 
-O site contém os componentes :
+<br>
 
-Home
-Cadastro
-Login
-Navbar
-Footer
-Produtos - Cadastro de Produto
-Categoria - Cadastro de Categoria
-Perfil - Cadastro de Usuário
+# :hammer: Componentes do Projeto
+`Home` 
+`Cadastro` 
+`Login` 
+`NavBar`
+`Footer`
+`Produtos - Crud`
+`Categoria - Crud`
+`Perfil`
+`Carrinho` 
 
+<br>
 
-# Getting Started with Create React App
+# 💻 Tecnologias
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<div style="display: inline_block"><br>
+  <img align="center" alt="HTML" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg">
+  <img align="center" alt="CSS" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original.svg">
+  <img align="center" alt="HTML" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" />
+  <img align="center" alt="React" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg">
+  <img align="center" alt="Java" height="30" width="40" src="https://user-images.githubusercontent.com/79949781/183263012-f25771dc-17a5-4ea0-9fb3-9c21cb3620cb.png">
+  <img align="center" alt="SpringBoot" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg">
+  <img align="center" alt="MySQL" height="30" width="40" src="https://user-images.githubusercontent.com/79949781/183263082-03faa487-921f-4faf-9a36-3b9bdf186525.png">
+  <img align="center" alt="Heroku" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/heroku/heroku-original.svg">
+  <img align="center" alt="Netlify" height="30" width="30" src="https://pics.freeicons.io/uploads/icons/png/11987465721551941710-512.png">
+  <img align="center" alt="Material UI" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/materialui/materialui-original.svg">
+  <img align="center" alt="Trello" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/trello/trello-plain.svg">
+</div>
 
-## Available Scripts
+<br>
 
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+# ✒️ Desenvolvedores
+<div>
+  <img height="100" width="100" src='https://farmaciasolidaria.netlify.app/static/media/Andrei.4c0c8e3e54a7586eb70fe6d2057bf5f2.svg'>
+  <img height="100" width="100" src='https://farmaciasolidaria.netlify.app/static/media/gabriel.3878d7f7f9c3c2ef9b9492e40b118a43.svg'>
+  <img height="100" width="100" src='https://farmaciasolidaria.netlify.app/static/media/leticia.035b09770c64b6eddafebee78ad2b098.svg'>
+  <img height="100" width="100" src='https://farmaciasolidaria.netlify.app/static/media/maikon.ce5202b0cb599260496f48c7e7a28969.svg'>
+  <img height="100" width="100" src='https://farmaciasolidaria.netlify.app/static/media/pamela.1a7408792abe5ac21e6e565414f0c189.svg'>
+  <img height="100" width="100" src='https://farmaciasolidaria.netlify.app/static/media/veronica.60ecd3560b4cdf3df12749a6a6ccbdb8.svg'>
+  <img height="100" width="100" src='https://farmaciasolidaria.netlify.app/static/media/wesley.596feb91d92931119df7220ec751bd95.svg'>
+</div>
